@@ -7,6 +7,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 
 def mse(test, predict):
+    """
+    evaluate the mean squared error between true data and predicted data
+    """
     result = 0
     for t, p in zip(test, predict):
         result += (p - t) ** 2
@@ -14,7 +17,7 @@ def mse(test, predict):
     return result
 
 # create data set
-x, y = make_regression(n_samples=500, n_features=1, noise=25, random_state=25)
+x, y = make_regression(n_samples=500, n_features=1, noise=25, random_state=100)
 
 # split data set into train and test
 x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=0)
