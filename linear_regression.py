@@ -5,16 +5,7 @@ from sklearn import datasets, linear_model
 from sklearn.datasets import make_regression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
-
-def mse(test, predict):
-    """
-    evaluate the mean squared error between true data and predicted data
-    """
-    result = 0
-    for t, p in zip(test, predict):
-        result += (p - t) ** 2
-    result /= len(test)
-    return result
+from MSE import mse
 
 # create data set
 x, y = make_regression(n_samples=500, n_features=1, noise=25, random_state=100)
