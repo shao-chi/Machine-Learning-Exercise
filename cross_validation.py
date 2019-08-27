@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split, KFold, LeaveOneOut, LeaveP
 # percentage of training data
 TRAIN_SPLIT = 0.7
 # K of K fold
-NUM_SPLITS = 5
+NUM_SPLITS = 3
 # p of leave-p-out
 P_VAL = 3
 
@@ -80,12 +80,18 @@ data = np.array([[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11, 12]])
 loocv = LeaveOneOut()
 lpocv = LeavePOut(p=P_VAL)
 
-print("\nLeave P / ONE out")
+######
+split_data = kfold.split(data)
+print("\nK-fold (K = {})".format(NUM_SPLITS))
+print_result(split_data)
+#####
+
+print("\nLeave P / ONE out (P = {})".format(P_VAL))
 
 split_data = loocv.split(data)
 print("Leave ONE out cross validation")
 print_result(split_data)
 
 split_data = lpocv.split(data)
-print("Leave P out cross validaiton")
+print("\nLeave P out cross validaiton")
 print_result(split_data)
