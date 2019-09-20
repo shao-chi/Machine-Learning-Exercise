@@ -41,16 +41,18 @@ y_test = Y[split:]
 
 # train linear regression model
 loss, weight = LinearRegression(x_train, y_train, n_iter=150, learn_rate=0.0001)
-
 plot_loss(loss)
 
-x_test_p = np.insert(x_test, 0, 1, axis=1)
-predict = x_test_p.dot(weight)
+def predict_LR(x, weight):
+    x = np.insert(x, 0, 1, axis=1)
+    predict = x.dot(weight)
+    return predict
+
+predict = predict_LR(x_test, weight)
 mse = mean_square_error(y_test, predict)
 print ("LinearRegression - Mean squared error of Testing: %s" % (mse))
 
-X_p = np.insert(X, 0, 1, axis=1)
-Y_predict = X_p.dot(weight)
+Y_predict = predict_LR(X, weight)
 mse_all = mean_square_error(Y, Y_predict)
 print ("LinearRegression - Mean squared error of all data: %s" % (mse_all))
 
