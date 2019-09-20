@@ -26,8 +26,8 @@ def plot_result(x_train, y_train, x_test, y_test, X, Y_predict, mse):
     plt.plot(X, Y_predict, color='black', linewidth=1, label="Prediction")
     plt.suptitle("Linear Regression")
     plt.title("MSE of testing: %.2f" % mse, fontsize=10)
-    plt.xlabel('Day')
-    plt.ylabel('Temperature in Celcius')
+    plt.xlabel('X')
+    plt.ylabel('Y')
     plt.legend((m1, m2), ("Training data", "Test data"), loc='lower right')
     plt.show()
 
