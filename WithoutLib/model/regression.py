@@ -38,3 +38,10 @@ def LinearRegression(X, Y, n_iter=100, learn_rate=0.001):
         weight -= grad_w * learn_rate
 
     return training_error, weight
+
+def LassoRegression(X, Y, degree, reg_factor, n_iter=100, learn_rate=0.001):
+    """
+    degree: the degree of polynomial
+    reg_factor: the amount of regularization and feature shrinkage
+    """
+    
