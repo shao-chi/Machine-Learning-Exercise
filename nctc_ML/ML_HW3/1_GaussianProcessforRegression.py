@@ -36,9 +36,9 @@ x_test = x[60:]
 t_test = t[60:]
 
 theta = np.array([[0, 0, 0, 1], [1, 4, 0, 0], [1, 4, 0, 5], [1, 32, 5, 5]])
-theta = np.array([[1, 4, 0, 0], [5, 4, 0, 0], [8, 4, 0, 0], [15, 4, 0, 0]])
-theta = np.array([[8, 4, 5, 0], [8, 4, 10, 0], [8, 4, 15, 0], [8, 4, 50, 0]])
-theta = [[8, 4, i, 0] for i in range(0,101)]
+# theta = np.array([[1, 4, 0, 0], [5, 4, 0, 0], [8, 4, 0, 0], [15, 4, 0, 0]])
+# theta = np.array([[8, 4, 5, 0], [8, 4, 10, 0], [8, 4, 15, 0], [8, 4, 50, 0]])
+theta = [[8, 4, i, 5] for i in range(0,101)]
 rms_train = []
 rms_test = []
 for ta in theta:
@@ -86,7 +86,7 @@ for ta in theta:
 rms_axis = np.linspace(0, 100, 101)
 plt.figure()
 plt.suptitle('θ = {}'.format(ta))
-# plt.title('Training RMS = {}, Testing RMS = {}'.format(RMS_train, RMS_test))
+plt.title('Training RMS = {}, Testing RMS = {}'.format(RMS_train, RMS_test))
 plt.plot(rms_axis, rms_train, c='blue')
 plt.plot(rms_axis, rms_test, c='green')
 plt.show()
@@ -123,11 +123,11 @@ plt.show()
 #     print('Training rms = {}'.format(RMS_train))
 #     print('Testing rms = {}'.format(RMS_test))
 
-#     # plt.figure()
-#     # plt.suptitle('θ = {}'.format(ta))
-#     # plt.title('Training RMS = {}, Testing RMS = {}'.format(RMS_train, RMS_test))
-#     # plt.plot(x_axis, mean, c='red')
-#     # plt.fill_between(x_axis, mean+sigma, mean-sigma, color='orange')
-#     # plt.scatter(x_train, t_train, marker='.', c='blue')
-#     # plt.scatter(x_test, t_test, marker='.', c='green')
-#     # plt.show()
+#     plt.figure()
+#     plt.suptitle('θ = {}'.format(ta))
+#     plt.title('Training RMS = {}, Testing RMS = {}'.format(RMS_train, RMS_test))
+#     plt.plot(x_axis, mean, c='red')
+#     plt.fill_between(x_axis, mean+sigma, mean-sigma, color='orange')
+#     plt.scatter(x_train, t_train, marker='.', c='blue')
+#     plt.scatter(x_test, t_test, marker='.', c='green')
+#     plt.show()

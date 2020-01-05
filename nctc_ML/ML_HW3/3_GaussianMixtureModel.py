@@ -9,11 +9,10 @@ def Kmeans(data, K, iter):
 
     mu = data[np.random.choice(len(data), K, replace=False)]
     gamma_nk = np.ones([len(data), K])
-    I = np.eye(K)
 
     for i in range(iter):
         distort = np.sum((data[:, None] - mu) ** 2, axis=2) 
-        new_gamma_nk = I[np.argmin(distort, axis=1)] 
+        new_gamma_nk = np.identity(K)[np.argmin(distort, axis=1)] 
         if new_gamma_nk.all() == gamma_nk.all():
             break
         else: 
@@ -46,8 +45,7 @@ def GaussianMixture(data, K, Kmean_gamma_nk, Kmean_mu, iter):
             gaussian.append(multivariate_normal.pdf(data, mean=Kmean_mu[k], cov=cov[k]) * pi[k])
         except:
             Kmean_mu[k] = np.random.rand(d)
-            temp = np.random.rand(d, d)
-            cov[k] = temp.dot(temp.T)
+            cov[k] = np.random.rand(d, d).dot(np.random.rand(d, d).T)
             gaussian.append(multivariate_normal.pdf(data, mean=Kmean_mu[k], cov=cov[k]) * pi[k])
 
     cov = np.array(cov)
@@ -61,16 +59,15 @@ def GaussianMixture(data, K, Kmean_gamma_nk, Kmean_mu, iter):
         N_k = np.sum(gamma, axis=0)
         mu = np.sum(gamma[:, :, None] * data[:, None], axis=0) / N_k[:, None]
         for k in range(K):
-            cov[k] = (gamma[:, k, None] * (data - mu[k])).T.dot(data - mu[k]) / N_k[k] + 1e-7 * np.eye(d)
-        pi = N_k / len(data)
+            cov[k] = (gamma[:, k, None] * (data - mu[k])).T.dot(data - mu[k]) / N_k[k] + 1e-7 * np.identity(d)
 
+        pi = N_k / len(data)
         for k in range(K):
             try: 
                 gaussian[k] = multivariate_normal.pdf(data, mean=mu[k], cov=cov[k]) * pi[k]
             except:
                 mu[k] = np.random.rand(d)
-                temp = np.random.rand(d, d)
-                cov[k] = temp.dot(temp.T)
+                cov[k] = np.random.rand(d, d).dot(np.random.rand(d, d).T)
                 gaussian[k] = multivariate_normal.pdf(data, mean=mu[k], cov=cov[k]) * pi[k]
 
         log_likelihood = np.sum(np.log(np.sum(gaussian, axis=0)))
